@@ -11,9 +11,14 @@
     color: gold;
 }
 
+.dialog {
+    padding: 10px;
+    color: antiquewhite;
+}
 
 .messages {
     padding: 10px;
+    color: antiquewhite;
 }
 
 .message {
