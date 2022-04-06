@@ -13,3 +13,8 @@
 .item a.active {
     color: gold;
 }
+
+.friends {
+    color: wheat;
+    padding-top: 50px;
+}

@@ -4,7 +4,9 @@
 }
 
 .dialogsItems {
-    padding: 10px;
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 1fr ;
 }
 
 .dialogsItems .active {
@@ -13,7 +15,7 @@
 
 .dialog {
     padding: 10px;
-    color: antiquewhite;
+    color: wheat;
 }
 
 .messages {
@@ -22,5 +24,13 @@
 }
 
 .message {
-
+    padding: 30px;
+    color: antiquewhite;
 }
+
+.item img {
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}
+
