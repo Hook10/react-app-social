@@ -13,7 +13,7 @@ let store = {
             newPostText: 'it-kama.com'
 
         },
-        messagesPage: {
+        dialogsPage: {
             dialogs: [
                 {id: 1, name: 'Dimych'},
                 {id: 2, name: 'Andrew'},
@@ -29,7 +29,7 @@ let store = {
                 {id: 4, message: 'Yo'},
                 {id: 5, message: 'Yo'}
             ],
-            newMessageText: 'it-message'
+            newMessageBody: 'it-message'
         },
 
         sidebar: {
@@ -52,19 +52,17 @@ let store = {
     },
 
 
+    dispatch(action) {
+        this._state.profilePage = profileReducer(this._state.profilePage, action);
+        this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+        this._state.sidebar = sidebarReducer(this._state.sidebar, action);
 
-    dispatch(action){
-
-         this._state.profilePage = profileReducer(this._state.profilePage, action);
-         this._state.messagesPage = dialogsReducer(this._state.messagesPage, action);
-         this._state.sidebar = sidebarReducer(this._state.sidebar, action);
         this._callSubscriber(this._state);
 
 
     }
 
 }
-
 
 
 export default store;

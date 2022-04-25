@@ -1,36 +1,52 @@
-const addmessage = 'ADD_MESSAGE';
-const updatenewmessagetext = 'UPDATE-NEW-MESSAGE-TEXT';
+const UPDATE_NEW_MESSAGE_BODY = 'UPDATE_NEW_MESSAGE_BODY';
+const SEND_MESSAGE = 'SEND_MESSAGE';
 
-export const dialogsReducer = (state, action) => {
+let initialState = {
 
-    switch (action.type) {
-        case addmessage:
-            let newMessage = {
-                id: 6,
-                message: state.newMessageText,
+    dialogs: [
+        {id: 1, name: 'Dimych'},
+        {id: 2, name: 'Andrew'},
+        {id: 3, name: 'Sveta'},
+        {id: 4, name: 'Sasha'},
+        {id: 5, name: 'Viktor'},
+        {id: 6, name: 'Valera'},
+    ],
+    messages: [
+        {id: 1, message: 'Hi'},
+        {id: 2, message: 'How is your it kama'},
+        {id: 3, message: 'Yo'},
+        {id: 4, message: 'Yo'},
+        {id: 5, message: 'Yo'}
+    ],
+    newMessageBody: 'it-message'
+
+}
+
+export const dialogsReducer = (state = initialState, action) => {
+
+
+        switch (action.type) {
+        case UPDATE_NEW_MESSAGE_BODY:
+                return {
+                    ...state,
+                    newMessageBody: action.body
+                };
+        case SEND_MESSAGE:
+                let body = state.newMessageBody;
+            return {
+                ...state,
+                newMessageBody: '',
+                messages: [...state.messages, {id: 6, message: body}]
             };
-            state.messages.push(newMessage);
-            state.newMessageText = '';
-            return state;
-        case updatenewmessagetext:
-            state.newMessageText = action.newMessage;
-            return state;
         default:
             return state;
-    }
+        }
+
 }
 
-export const addMessageActionCreator = () => {
-    return {
-        type: addmessage
-    }
-}
+export const sendMessageCreator = () => ({type: SEND_MESSAGE})
+export const updateNewMessageBodyCreator = (body) =>
+    ({ type: UPDATE_NEW_MESSAGE_BODY, body: body })
 
-export const onMessageChangeActionCreator = (text) => {
-    return {
-        type: updatenewmessagetext,
-        newMessage: text
-    }
-}
 
 export default dialogsReducer;

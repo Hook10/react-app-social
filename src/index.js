@@ -3,30 +3,22 @@ import './index.css';
 import reportWebVitals from './reportWebVitals';
 import ReactDOM from "react-dom";
 import App from "./App";
-import store from "./redux/store";
+import store from "./redux/redux-store";
+import {BrowserRouter} from "react-router-dom";
+import {Provider} from "react-redux";
 
-let rerenderEntireTree = (state) => {
-    ReactDOM.render(
-        <React.StrictMode>
-            <App state={store.getState()}
 
-                 dispatch={store.dispatch.bind(store)}
-
-                 // addMessage={store.dis.bind(store)}
-                 // updateNewMessageText={store.updateNewMessageText.bind(store)}
-            />
-        </React.StrictMode>,
+ReactDOM.render(
+         // <React.StrictMode>
+            <BrowserRouter>
+                <Provider store = {store}>
+                    <App/>
+                </Provider>
+            </BrowserRouter>,
+         // </React.StrictMode>,
         document.getElementById('root')
     );
-}
 
-
-
-rerenderEntireTree(store.getState());
-
-
-
-store.subscribe(rerenderEntireTree);
 
 
 

@@ -2,26 +2,27 @@ import React from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./dialogitem/DialogItem";
 import Message from "./message/Message";
-import {addMessageActionCreator, onMessageChangeActionCreator} from "../../redux/dialogs-reducer";
-
 
 
 const Dialogs = (props) => {
 
+    let state = props.dialogsPage;
 
-    let dialogsElements = props.messagesPage.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
+    let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>)
 
-    let messagesElements = props.messagesPage.messages.map(m => <Message message={m.message}/>)
+    let messagesElements = state.messages.map(m => <Message message={m.message}/>)
 
-    let newMessageElement = React.createRef();
+    let newMessageBody = state.newMessageBody;
 
-    let addMessage = () =>   {
-       props.dispatch(addMessageActionCreator())
+    let onSendMessageClick = () =>   {
+       // props.dispatch(sendMessageCreator())
+        props.sendMessage();
     }
 
-    let onMessageChange = () => {
-        let text = newMessageElement.current.value;
-        props.dispatch(onMessageChangeActionCreator(text));
+    let onNewMessageChange = (e) => {
+        let body = e.target.value;
+        props.updateNewMessageBody(body);
+        // props.store.dispatch(onMessageChangeActionCreator(text));
     }
 
     return (
@@ -33,10 +34,12 @@ const Dialogs = (props) => {
                 {messagesElements}
                 <div>
                     <div>
-                        <textarea onChange={onMessageChange} ref={newMessageElement} value={props.messagesPage.newMessageText}/>
+                        <textarea value={newMessageBody}
+                                  onChange={onNewMessageChange}
+                                  placeholder='Enter your message'></textarea>
                     </div>
                     <div>
-                        <button onClick={addMessage}>Add message</button>
+                        <button onClick={onSendMessageClick}>Send</button>
                     </div>
                 </div>
             </div>
